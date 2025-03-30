@@ -1,0 +1,241 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int main()
+{
+	int jogo, escolhaCnC, escolhaPR, escolhaGW1, escolhaGW2;
+	char resposta;
+	//Gerando uma semente aleatória para o rand
+	    srand(time(NULL));
+	    
+				menu:
+		system("cls");
+		printf("=======================================\n");
+		printf("OLA, JOGADOR. QUAL JOGO VOCE ESCOLHE?\n--------------------------------------\n1) Perguntas e Respostas \n2) Cobra na Caixa \n3) Gousmas War\n4)Sair\nSua escolha e:");
+		scanf("%i", &jogo);
+		
+		//Fazendo a escolha do jogo
+		switch(jogo){
+		case 1:{//Começa perguntas e respostas
+		int op;
+		 
+		 
+		  printf("Bem Vindo ao Perguntas e respostas.  \n digite 1) pra voltar \n digite 2) para iniciar \n");
+		  scanf("%i", &op);
+		   
+		 if (op==1){
+			 	 printf("Voltando...");
+			 	 goto menu;
+		 }
+		 
+		 if (op==2){
+			     printf("iniciar");
+			    
+		 }
+		  	  	  rodadaPR:
+		//colocar pergunta 1 aqui e as respostas
+		  printf("\n pergunta 1/5 \n Qual a primeira fase do luto de acordo com Elisabeth Kubler-ross?  \n a) negacao b) aceitacao c) barganha d) nenhuma das alternativas acima \nSua resposta e:");
+		  scanf(" %c",&resposta);
+		  
+		 if (resposta == 'a' ) {
+			printf("acertou, a resposta era negacao.\n Esses estagios representam as emocoes que uma pessoa pode experimentar ao enfrentar uma perda significativa \n embora possam variar de individuo para individuo\n ");		 	 
+		 } else {
+		 	
+			 	 printf("errou, a resposta era 'A' negacao. \n Esses estagios representam as emocoes que uma pessoa pode experimentar ao enfrentar uma perda \n embora possam variar de individuo para individuo\n.");
+		 } 
+		  //continuar com mais 4
+		  printf("\n pergunta 2/5 Qual e o maior continente do mundo? \n  \n a)Europa b)America do Sul c)Asia d)nenhum \n Sua resposta e:");
+		  scanf(" %c",&resposta);
+		  
+		 if (resposta == 'c' ) {
+			printf("acertou, a resposta era Asia. \n  ");		 	 
+		 } else {
+		 	
+			 	 printf("errou, a resposta era letra 'c' Asia \n");
+		 } 
+		 
+		 printf("\n pergunta 3/5 \n Quanto tempo a Terra demora para dar uma volta completa em torno dela mesma?  \n a)365 dias b)24 horas c)7 dias d)nenhum \n Sua resposta e:");
+		  scanf(" %c",&resposta);
+		  
+		 if (resposta == 'b' ) {
+			printf("acertou, a resposta era 24 horas \n");		 	 
+		 } else {
+		 	
+			 	 printf("errou, a resposta era 'b' 24 horas \n");
+		 } 
+		 //i know its for the better
+		 printf("\n pergunta 4/5 \n O que e maior: Gigabyte, Terabyte ou megabyte?  \n a)Megabyte b)Gigabyte c)Terabyte d)nenhum \nSua resposta e:");
+		  scanf(" %c",&resposta);
+		  
+		 if (resposta == 'c' ) {
+			printf("acertou, a resposta era Terabyte, onde 1 Terabyte contem 1,000,000,000,000 Bytes \n ");		 	 
+		 } else {
+		 	
+			 	 printf("errou, a resposta era 'C'  Terabyte, onde 1 Terabyte contem 1,000,000,000,000 Bytes \n");
+		 } 
+		 
+		 printf("\n pergunta 5/5 \n Qual o Nome da tabela que utilizam na Logica matematica  \n a) mentira b)verdade c)hiperbole d)sabida \n Sua resposta e:");
+		  scanf(" %c",&resposta);
+		  
+		 if (resposta == 'b' ) {
+			printf("acertou, a resposta era Tabela verdade. \n");		 	 
+		 } else {
+		 	
+			 	 printf("errou, a resposta era 'b' tabela verdade, bora voltar pra aula da Polyana?\n ");
+		 }
+		 do{
+				printf("\nO que voce deseja?:\n1) Retornar ao menu\n2) Nova Rodada\nSua escolha e: ");
+				scanf("%i", &escolhaPR);
+				if(escolhaPR == 1){
+					printf("Retornando para o Menu...");
+					goto menu;
+				}
+				if (escolhaPR==2){
+					printf("Começando uma nova rodada...\n");
+					system("cls");
+					goto rodadaPR;
+		}
+							if(escolhaPR!=1 && escolhaPR!=2){
+								printf("Escolha invalida, retornando as perguntas...");
+							}	
+						}while(escolhaPR!=1 && escolhaPR!=2);
+			break;
+		}
+		case 2:{//Começa cobra na caixa
+		
+	    
+	    int p1, p2, comeca, caixa,caixa2, caixaCobra, caixaBotao;
+	    //Fazer um loop até o player escolher um jogador válido
+	    do{
+	    	printf("Seja muito bem vindo ao Cobra na Caixa. Vamos comecar?\n\n\n");
+	    	printf("Primeiramente, player 1, escolha um personagem entre:\n (1) Gael\n(2) Frida\n(3) Gwyn\n(4) Malenia\n(5) Gascoine\n(6)Midir\n(7)Isshin\n sua escolha e:");
+	    	scanf("%i", &p1);
+	    	if (p1>5 || p1<1){
+				printf ("Numero invalido, voltando para a seleção de personagens...\n");
+			
+			}
+		}while (p1>5 || p1<1);
+		//Fazer um loop até o player escolher um jogador válido
+		do{
+	    	printf("Agora, player 2, escolha um personagem entre:\n (1) Gael\n(2) Frida\n(3) Gwyn\n(4) Malenia\n(5) Gascoine\n sua escolha e:");
+	    	scanf(" %i", &p2);
+			if (p2 > 5 || p2<1){
+					printf ("Numero invalido, voltando para a seleção de personagens...\n");
+			
+			}
+		}while (p2>5 || p2<1);
+					rodadaCnC:
+			//Gerando um número aleatório que se limita a 0 e 1
+			//Explicação: O rand gera um número aleatório entre 0 e 32767, mas ao dividir pelo módulo de 2, os valores sempre vão retornar 0 ou 1 aí só somar 1.
+			comeca = (rand() %2) + 1;  
+			printf("\nO jogador que comecara e o: Player %i\n\n", comeca );
+			
+			//Fazendo um loop até o jogador escolher a caixa com a cobra ou o botão
+			do{
+				//Fazer um loop até o player escolher uma caixa válida
+				do{
+					printf("Player %i, Escolha uma caixa dentre essas 5:\n(1) caixa 1\n(2) caixa 2\n(3) caixa 3\n(4) caixa 4\n(5) caixa 5\n", comeca);
+					scanf("%i", &caixa);
+					if (caixa >5){
+						printf("Numero invalido, voltando a seleçao da caixa...\n");
+					}
+					 
+				}while (caixa >5);
+				//Randomizando a escolha do botão e da cobra e evitando que elas fiquem na mesma caixa
+				caixaCobra = (rand()%5) + 1;
+				do{
+					caixaBotao = (rand() %5) +1;
+				}while (caixaCobra == caixaBotao);
+			
+			
+					if (caixa == caixaCobra){
+						printf("Voce achou a cobra, que pena. Voce perdeu.");
+						do{
+							printf("\nO que voce deseja?:\n1) Retornar ao menu\n2) Nova Rodada\nSua escolha e: ");
+							scanf("%i", &escolhaCnC);
+							if(escolhaCnC == 1){
+								printf("Retornando para o Menu...");
+								goto menu;
+							}
+							if (escolhaCnC==2){
+								printf("Começando uma nova rodada...\n");
+								system("cls");
+								goto rodadaCnC;
+							}
+							if(escolhaCnC!=1 && escolhaCnC!=2){
+								printf("Escolha invalida, retornando as perguntas...");
+							}	
+						}while(escolhaCnC!=1 && escolhaCnC!=2);	
+				   	}
+					if (caixa==caixaBotao){
+						printf("Uhuuuul! Voce achou o botao, que sorte. Voce ganhou.");
+						do{
+							printf("\nO que voce deseja?:\n1) Retornar ao menu\n2) Nova Rodada\nSua escolha e: ");
+							scanf("%i", &escolhaCnC);
+							if(escolhaCnC == 1){
+								printf("Retornando para o Menu...");
+								goto menu;
+							}
+							if (escolhaCnC==2){
+								printf("Começando uma nova rodada...\n");
+								system("cls");
+								goto rodadaCnC;
+							}
+							if(escolhaCnC!=1 && escolhaCnC!=2){
+								printf("Escolha invalida, retornando as perguntas...");
+							}	
+						}while(escolhaCnC!=1 && escolhaCnC!=2);
+					}
+					
+					//Fazer um loop até o player escolher uma caixa válida
+				do{
+					printf("Outro player, Escolha uma caixa dentre essas 5:\n(1) caixa 1\n(2) caixa 2\n(3) caixa 3\n(4) caixa 4\n(5) caixa 5\n");
+					scanf("%i", &caixa2);
+					if (caixa2 >5){
+						printf("Numero invalido, voltando a seleçao da caixa...\n");
+					}
+					 
+				}while (caixa2 >5);
+				
+				if (caixa2 == caixaCobra){
+						printf("Voce achou a cobra, que pena. Voce perdeu.");
+						do{
+							printf("\nO que voce deseja?:\n1) Retornar ao menu\n2) Nova Rodada\nSua escolha e: ");
+							scanf("%i", &escolhaCnC);
+							if(escolhaCnC == 1){
+								printf("Retornando para o Menu...");
+								goto menu;
+							}
+							if (escolhaCnC==2){
+								printf("Começando uma nova rodada...\n");
+								system("cls");
+								goto rodadaCnC;
+							}
+							if(escolhaCnC!=1 && escolhaCnC!=2){
+								printf("Escolha invalida, retornando as perguntas...");
+							}	
+						}while(escolhaCnC!=1 && escolhaCnC!=2);	
+				}
+				if (caixa2==caixaBotao){
+					printf("Uhuuuul! Voce achou o botao, que sorte. Voce ganhou.");
+					do{
+							printf("\nO que voce deseja?:\n1) Retornar ao menu\n2) Nova Rodada\nSua escolha e: ");
+							scanf("%i", &escolhaCnC);
+							if(escolhaCnC == 1){
+								printf("Retornando para o Menu...");
+								goto menu;
+							}
+							if (escolhaCnC==2){
+								printf("Começando uma nova rodada...\n");
+								system("cls");
+								goto rodadaCnC;
+							}
+							if(escolhaCnC!=1 && escolhaCnC!=2){
+								printf("Escolha invalida, retornando as perguntas...");
+							}	
+						}while(escolhaCnC!=1 && escolhaCnC!=2);
+					}
+					printf("Nada de cobra ou botao. Comecando nova rodada...\n");
+			}while (caixa != caixaCobra && caixa != caixaBotao);
+			break;
+		}
