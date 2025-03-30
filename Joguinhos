@@ -274,7 +274,7 @@ int main()
 				printf("REGRAS:\nCada jogador comeca com 2 Gousmas, cada uma com furia 1.\nAo atacar, a furia da Gousma atacante e transferida para a defensora.\nSe a furia de uma Gousma ultrapassar 5, ela se desintegra.\nO jogador pode dividir uma Gousma, transferindo parte da furia para uma nova Gousma (maximo de 2 Gousmas por jogador).\nO jogo termina quando um jogador perder todas as suas Gousmas.\n Regras ditas, vamos comecar.\n");
 			}
 			if (r==2){
-				printf("\nVamos comecar, então.\n");
+				printf("\nVamos comecar, entao.\n");
 			}
 			if (r!=1 && r!=2){
 				printf("Resposta invalida, repetindo pergunta...");
@@ -282,11 +282,15 @@ int main()
 			}while (r!=1 && r!=2);
 			
 			
-			
+				rodadaGW:
+				morte1_1= false;
+				morte1_2= false;
+				morte2_1= false;
+				morte2_2= false;
 				gosmas1=2;
 				gosmas2=2;//Gosmas vivas de cada player
-					rodadaGW:
-				printf("\n O turno comeca com o jogador 1.");
+				
+				printf("\nO turno comeca com o jogador 1.");
 				
 					
 					do{
@@ -335,7 +339,7 @@ int main()
 										}
 											
 									}
-									printf("\nQual gosma voce ira atacar do seu oponente?\n (1) Gosma 1, que tem %i de furia\n (2)Gosma 2, que tem %i de furia\nSua escolha:", furia2_1, furia2_2);
+									printf("\nQual gosma voce ira atacar do seu oponente?\n (1) Gosma 1, que tem %i de furia\n (2) Gosma 2, que tem %i de furia\nSua escolha:", furia2_1, furia2_2);
 									scanf("%i", &sofredor2);//Quem será sofredor;
 									switch (sofredor2) {
 			        case 1: { // Caso a Gosma 1 do Player 2 seja atacada
@@ -754,7 +758,7 @@ int main()
 														                }
 														                if(furia2_2%2==1){
 														                    furia2_2=furia2_2/2;
-														                    furia2_1=furia2_2+1;
+                   														 furia2_1=furia2_2+1;
 														                }
 														            }
 														            gosmas2=++gosmas2;
