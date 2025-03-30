@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 int main()
 {
 	int jogo, escolhaCnC, escolhaPR, escolhaGW1, escolhaGW2;
@@ -239,3 +240,542 @@ int main()
 			}while (caixa != caixaCobra && caixa != caixaBotao);
 			break;
 		}
+		
+		case 3:{//Começa Gousmas War
+			
+			int c, r; //Variável para começar o jogo; variavel para ver as regras
+			int gosmas1, gosmas2;//Variáveis para gosmas
+			int furia1_1=5, furia1_2=5, furia2_1=5, furia2_2=5;//Variáveis de fúria para cada gosma
+			int atacante1, atacante2, sofredor1, sofredor2;//Variáveis para quem ataca e quem sofre,_,
+			int fim;
+			bool morte1_1= false, morte1_2= false, morte2_1= false, morte2_2= false;
+			
+			do{ //Laço de rep para números errados
+			printf("-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-@-\nSEJA BEM VINDO AO GOUSMAS WAR\nVamos comecar?\n1)Comecar\n2)Voltar menu\nSua escolha:");
+			scanf("%i",&c);
+			
+			if (c==1){
+				printf("Vamos comecar, entao\n");
+			}
+			if (c==2){
+				printf("Retornando ao menu...");
+				goto menu;
+			}
+			if (c!=1 && c!=2){
+				printf("Resposta invalida, repetindo pergunta...");
+			}
+			}while (c!=1 && c!=2);
+			
+			do{ //Laço de rep para números errados
+			printf("Voce gostaria de ver as regras?\n1)Sim\n2)Nao\nSua resposta:");
+			scanf("%i",&r);
+			
+			if (r==1){
+				printf("REGRAS:\nCada jogador comeca com 2 Gousmas, cada uma com furia 1.\nAo atacar, a furia da Gousma atacante e transferida para a defensora.\nSe a furia de uma Gousma ultrapassar 5, ela se desintegra.\nO jogador pode dividir uma Gousma, transferindo parte da furia para uma nova Gousma (maximo de 2 Gousmas por jogador).\nO jogo termina quando um jogador perder todas as suas Gousmas.\n Regras ditas, vamos comecar.\n");
+			}
+			if (r==2){
+				printf("\nVamos comecar, então.\n");
+			}
+			if (r!=1 && r!=2){
+				printf("Resposta invalida, repetindo pergunta...");
+			}
+			}while (r!=1 && r!=2);
+			
+			
+			
+				gosmas1=2;
+				gosmas2=2;//Gosmas vivas de cada player
+					rodadaGW:
+				printf("\n O turno comeca com o jogador 1.");
+				
+					
+					do{
+											acao1:
+										printf("\n--- Situacao Atual ---\n");
+									    printf("Jogador 1:\n");
+									    if(morte1_1==false){
+									    printf("Gosma 1: %i de furia\n", furia1_1);
+										}else{
+											printf("Gosma 1: desintegrado\n");
+										}
+									    if(morte1_2==false){
+									    printf("Gosma 2: %i de furia\n", furia1_2);
+										}else{
+											printf("Gosma 2: desintegrado\n");
+										}
+									    printf("Jogador 2:\n");
+									    if(morte2_1==false){
+									    printf("Gosma 1: %i de furia\n", furia2_1);
+										}else{
+											printf("Gosma 1: desintegrado\n");
+										}
+									    if(morte2_2==false){
+									    printf("Gosma 2: %i de furia\n", furia2_2);
+										}else{
+											printf("Gosma 2: desintegrado\n");
+										}
+									    printf("----------------------\n");
+				printf("\nPlayer 1, Qual sera sua acao?\n1) Atacar\n2) Dividir\nSua acao?");
+				scanf("%i", &escolhaGW1);
+				switch(escolhaGW1){
+								case 1:{//ataque
+									printf("\nCom qual gosma voce ira atacar?\n (1) Gosma 1, que tem %i de furia\n (2) Gosma 2, que tem %i de furia\nSua escolha:",furia1_1, furia1_2);
+									scanf("%i", &atacante1);//Quem atacará;
+									if(atacante1==1){
+										if(morte1_1==true){
+											printf("Nao e possivel atacar com essa gosma, pois ela esta desintegrada. Voltando seu turno...");
+												goto acao1;
+										}
+											
+									}
+									if(atacante1==2){
+										if(morte1_2==true){
+											printf("Nao e possivel atacar com essa gosma, pois ela esta desintegrada. Voltando seu turno...");
+												goto acao1;
+										}
+											
+									}
+									printf("\nQual gosma voce ira atacar do seu oponente?\n (1) Gosma 1, que tem %i de furia\n (2)Gosma 2, que tem %i de furia\nSua escolha:", furia2_1, furia2_2);
+									scanf("%i", &sofredor2);//Quem será sofredor;
+									switch (sofredor2) {
+			        case 1: { // Caso a Gosma 1 do Player 2 seja atacada
+			            switch (atacante1) {
+			                case 1: { // Se a Gosma 1 do Player 1 atacar
+			                	if(morte2_1==true){
+									printf("Nao e possivel atacar essa gosma, la ja esta desintegrada.Voltando ao seu turno...");
+									goto acao1;
+								}else{
+			                    furia2_1 += furia1_1; // Soma a fúria recebida
+								furia1_1-=furia1_1;//Diminuir o valorr da fúria
+								furia1_1=+1;
+			                    if (furia2_1 >= 6) { // Se a fúria ultrapassar o limite
+			                    	morte2_1=true;
+			                        furia2_1 = 0;
+			                        gosmas2--; // Reduz a quantidade de gosmas do Player 2
+			
+			                        if (gosmas2 == 0) { // Se o Player 2 perdeu todas as gosmas
+			                            printf("Player 2 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+			                            scanf("%i", &fim);
+			
+			                            if (fim == 1) {
+			                                printf("Comecando nova rodada...\n");
+			                                goto rodadaGW;
+			                            } else if (fim == 2) {
+			                                printf("Indo para o menu...\n");
+			                                goto menu;
+			                            } else {
+			                                printf("Resposta invalida, retornando pergunta...\n");
+			                            }
+			                        }
+			                    }
+							}
+			                    break;
+			                }
+			
+			                case 2: { // Se a Gosma 2 do Player 1 atacar
+			                	if (morte2_1==true){
+									printf("Nao e possivel atacar essa gosma. Ela ja esta desintegrada.Voltando ao seu turno...");
+									goto acao1;
+								}else{
+			                    furia2_1 += furia1_2;
+								furia1_2-=furia1_2;//Diminuir o valorr da fúria
+								furia1_2=+1;
+			                    if (furia2_1 >= 6) {
+			                    	morte2_1=true;
+			                        furia2_1 = 0;
+			                        gosmas2--;
+			
+			                        if (gosmas2 == 0) {
+			                            printf("Player 2 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+			                            scanf("%i", &fim);
+			
+			                            if (fim == 1) {
+			                                printf("Comecando nova rodada...\n");
+			                                goto rodadaGW;
+			                            } else if (fim == 2) {
+			                                printf("Indo para o menu...\n");
+			                                goto menu;
+			                            } else {
+			                                printf("Resposta inválida, retornando pergunta...\n");
+			                            }
+			                        }
+			                    }
+							}
+			                    break;
+			                }
+			            }
+			            break;
+			        }
+			
+			        case 2: { // Caso a Gosma 2 do Player 2 seja atacada
+			            switch (atacante1) {
+			                case 1: { // Se a Gosma 1 do Player 1 atacar
+			                	if (morte2_2==true){
+									printf("Nao e possivel atacar essa gosma. Ela ja esta desintegrada.Voltando ao seu turno...");
+									goto acao1;
+								}else{
+			                    furia2_2 += furia1_1;
+								furia1_1-=furia1_1;//Diminuir o valorr da fúria
+								furia1_1=+1;
+			                    if (furia2_2 >= 6) {
+			                    	morte2_2=true;
+			                        furia2_2 = 0;
+			                        gosmas2--;
+			
+			                        if (gosmas2 == 0) {
+			                            printf("Player 2 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+			                            scanf("%i", &fim);
+			
+			                            if (fim == 1) {
+			                                printf("Comecando nova rodada...\n");
+			                                goto rodadaGW;
+			                            } else if (fim == 2) {
+			                                printf("Indo para o menu...\n");
+			                                goto menu;
+			                            } else {
+			                                printf("Resposta invalida, retornando pergunta...\n");
+			                            }
+			                        }
+			                    }
+							}
+			                    break;
+			                }
+			
+			                case 2: { // Se a Gosma 2 do Player 1 atacar
+			                	if (morte2_2==true){
+									printf("Nao e possivel atacar essa gosma. Ela ja esta desintegrada.Voltando ao seu turno...");
+									goto acao1;
+								}else{
+			                    furia2_2 += furia1_2;
+								furia1_2-=furia1_2;//Diminuir o valorr da fúria
+								furia1_2=+1;
+			                    if (furia2_2 >= 6) {
+			                    	morte2_2=true;
+			                        furia2_2 = 0;
+			                        gosmas2--;
+			
+			                        if (gosmas2 == 0) {
+			                            printf("Player 2 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+			                            scanf("%i", &fim);
+			
+			                            if (fim == 1) {
+			                                printf("Começando nova rodada...\n");
+			                                goto rodadaGW;
+			                            } else if (fim == 2) {
+			                                printf("Indo para o menu...\n");
+			                                goto menu;
+			                            } else {
+			                                printf("Resposta inválida, retornando pergunta...\n");
+			                            }
+			                        }
+			                    }
+							}
+			                    break;
+			                }
+			            }
+			            break;
+			        }
+			
+			        default:
+			            printf("Escolha invalida!\n");
+			    }
+												break;	
+							}
+										case 2:{//Divisão
+										
+											if(gosmas1==2){
+												printf("\nVoce ja tem o numero maximo de gosmas. retornando ao seu turno...");
+													goto acao1;
+												}
+												if (gosmas1==1){
+													if(furia1_1==1){
+														printf("Nao e possível dividir quando se tem apenas 1 de furia.Voltando ao seu turno...");
+															goto acao1;
+													}
+													if(furia1_1!=0&&furia1_1!=1){
+														morte1_1=false;
+														morte1_2=false;
+														if(furia1_1%2==0){
+															furia1_1=furia1_1/2;
+															furia1_2=furia1_1;
+														}
+														if(furia1_1%2==1){
+															furia1_1=furia1_1/2;
+															furia1_2=furia1_1+1;
+														}
+													}
+													if(furia1_2==1){
+														printf("Nao e possível dividir quando se tem apenas 1 fúria.Voltando ao seu turno...");
+															goto acao1;
+													}
+													if(furia1_2!=0&&furia1_2!=1){
+														
+														if(furia1_2%2==0){
+															furia1_2=furia1_2/2;
+															furia1_1=furia1_2;
+														}
+														if(furia1_2%2==1){
+															furia1_2=furia1_2/2;
+															furia1_1=furia1_2+1;
+														}
+													}
+													gosmas1= ++gosmas1;
+													morte1_1=false;
+													morte1_2=false;
+													printf("Voce dividiu as gosmas.");
+												}
+												break;
+											}
+										}
+									
+										printf("\n--- Situacao Atual ---\n");
+									    printf("Jogador 1:\n");
+									    if(morte1_1==false){
+									    printf("Gosma 1: %i de furia\n", furia1_1);
+										}else{
+											printf("Gosma 1: desintegrado\n");
+										}
+									    if(morte1_2==false){
+									    printf("Gosma 2: %i de furia\n", furia1_2);
+										}else{
+											printf("Gosma 2: desintegrado\n");
+										}
+									    printf("Jogador 2:\n");
+									    if(morte2_1==false){
+									    printf("Gosma 1: %i de furia\n", furia2_1);
+										}else{
+											printf("Gosma 1: desintegrado\n");
+										}
+									    if(morte2_2==false){
+									    printf("Gosma 2: %i de furia\n", furia2_2);
+										}else{
+											printf("Gosma 2: desintegrado\n");
+										}
+									    printf("----------------------\n");
+											acao2://A partir desse código eu pedi para o chat gpt recriar o código anterior, mas modificando somente as variáveis para o Player 2 (Obviamente eu fui corrigindo alguns erros)			
+										printf("\nAgora Player 2, qual sera sua acao?\n1) Atacar\n2) Dividir\nSua acao:");
+										scanf("%i", &escolhaGW2);
+														switch(escolhaGW2){
+														    case 1:{//ataque
+														        printf("\nCom qual gosma voce ira atacar?\n (1) Gosma 1, que tem %i de furia\n (2) Gosma 2, que tem %i de furia\nSua escolha:",furia2_1, furia2_2);
+														        scanf("%i", &atacante2);//Quem atacará;
+																if(atacante2==1){
+																if(morte2_1==true){
+																	printf("Nao e possivel atacar com essa gosma, pois ela esta desintegrada. Voltando seu turno...");
+																		goto acao2;
+																}
+																	
+															}
+															if(atacante2==2){
+																if(morte2_2==true){
+																	printf("Nao e possivel atacar com essa gosma, pois ela esta desintegrada. Voltando seu turno...");
+																		goto acao2;
+																}
+																	
+															}
+														        printf("\nQual gosma voce ira atacar do seu oponente?\n (1) Gosma 1, que tem %i de furia\n (2) Gosma 2, que tem %i de furia\nSua escolha:", furia1_1, furia1_2);
+														        scanf("%i", &sofredor1);//Quem será sofredor;
+														     switch (sofredor1) {
+														        case 1: { // Se a Gosma 1 do Player 1 for atacada
+														            switch (atacante2) {
+														                case 1: { // Se a Gosma 1 do Player 2 atacar
+														                	if (morte1_1==true){
+																				printf("Nao e possivel atacar essa gosma. Ela ja esta desintegrada.Voltando ao seu turno...");
+																				goto acao2;
+																			}else{
+														                    furia1_1 += furia2_1;
+														                    furia2_1-=furia2_1;//Diminuir o valorr da fúria
+														                    furia2_1=+1;
+														                    if (furia1_1 >= 6) {// Se a fúria da gosma ultrapassar o limite
+														                    	morte1_1=true;
+														                        furia1_1 = 0; // A gosma é eliminada
+														                        gosmas1--; // Diminui a quantidade de gosmas do Player 1
+														
+														                        if (gosmas1 == 0) { // Se o Player 1 perdeu todas as gosmas
+														                            printf("Player 1 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+														                            scanf("%i", &fim);
+														                            
+														                            if (fim == 1) {
+														                                printf("Começando nova rodada...\n");
+														                                goto rodadaGW;
+														                            } else if (fim == 2) {
+														                                printf("Indo para o menu...\n");
+														                                goto menu;
+														                            } else {
+														                                printf("Resposta inválida, retornando pergunta...\n");
+														                            }
+														                        }
+														                    }
+																		}
+														                    break;
+														                }
+														
+														                case 2: { // Se a Gosma 2 do Player 2 atacar
+														                	if (morte1_1==true){
+																				printf("Nao é possivel atacar essa gosma. Ela ja esta desintegrada.Voltando ao seu turno...");
+																				goto acao2;
+																			}else{
+														                    furia1_1 += furia2_2;
+																			furia2_2-=furia2_2;//Diminuir o valorr da fúria
+																			furia2_2=+1;
+														                    if (furia1_1 >= 6) {
+														                    	morte1_1=true;
+														                        furia1_1 = 0;
+														                        gosmas1--;
+														
+														                        if (gosmas1 == 0) {
+														                            printf("Player 1 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+														                            scanf("%i", &fim);
+														
+														                            if (fim == 1) {
+														                                printf("Começando nova rodada...\n");
+														                                goto rodadaGW;
+														                            } else if (fim == 2) {
+														                                printf("Indo para o menu...\n");
+														                                goto menu;
+														                            } else {
+														                                printf("Resposta inválida, retornando pergunta...\n");
+														                            }
+														                        }
+														                    }
+																		}
+														                    break;
+														                }
+														            }
+														            break;
+														        }
+														
+														        case 2: { // Se a Gosma 2 do Player 1 for atacada
+														            switch (atacante2) {
+														                case 1: { // Se a Gosma 1 do Player 2 atacar
+														                	if (morte1_1==true){
+																				printf("Nao é possivel atacar essa gosma. Ela ja esta desintegrada.Voltando ao seu turno...");
+																				goto acao2;
+																			}else{
+														                    furia1_2 += furia2_1;
+																			furia2_1-=furia2_1;//Diminuir o valorr da fúria
+																			furia2_1=+1;
+														                    if (furia1_2 >= 6) {
+														                    	morte1_2=true;
+														                        furia1_2 = 0;
+														                        gosmas1--;
+														
+														                        if (gosmas1 == 0) {
+														                            printf("Player 1 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+														                            scanf("%i", &fim);
+														
+														                            if (fim == 1) {
+														                                printf("Começando nova rodada...\n");
+														                                goto rodadaGW;
+														                            } else if (fim == 2) {
+														                                printf("Indo para o menu...\n");
+														                                goto menu;
+														                            } else {
+														                                printf("Resposta inválida, retornando pergunta...\n");
+														                            }
+														                        }
+														                    }
+																		}
+														                    break;
+														                }
+														
+														                case 2: { // Se a Gosma 2 do Player 2 atacar
+														                	if (morte1_1==true){
+																				printf("Nao é possivel atacar essa gosma. Ela ja esta desintegrada.Voltando ao seu turno...");
+																				goto acao2;
+																			}else{
+														                    furia1_2 += furia2_2;
+																			furia2_2-=furia2_2;//Diminuir o valorr da fúria
+																			furia2_2=+1;
+														                    if (furia1_2 >= 6) {
+														                    	morte1_2=true;
+														                        furia1_2 = 0;
+														                        gosmas1--;
+														
+														                        if (gosmas1 == 0) {
+														                            printf("Player 1 perdeu. O que deseja fazer?\n1) Nova rodada\n2) Menu\nSua escolha: ");
+														                            scanf("%i", &fim);
+														
+														                            if (fim == 1) {
+														                                printf("Começando nova rodada...\n");
+														                                goto rodadaGW;
+														                            } else if (fim == 2) {
+														                                printf("Indo para o menu...\n");
+														                                goto menu;
+														                            } else {
+														                                printf("Resposta inválida, retornando pergunta...\n");
+														                            }
+														                        }
+														                    }
+																		}
+														                    break;
+														                }
+														            }
+														            break;
+														        }
+														
+														        default:
+														            printf("Escolha inválida!\n");
+														    }
+														
+														    break;
+														}
+														    break;    
+														    
+														    case 2:{//Divisão
+														        if(gosmas2==2){
+														            printf("\nVoce ja tem o numero maximo de gosmas. retornando ao seu turno");
+														            goto acao2;
+														        }
+														        if (gosmas2==1){
+														        	if(furia2_1==1){
+																		printf("Não é possível dividir quando se tem apenas 1 fúria.Voltando ao seu turno...");
+																			goto acao2;
+																	}
+														            if(furia2_1!=0 && furia2_1!=1){
+														                if(furia2_1%2==0){
+														                    furia2_1=furia2_1/2;
+														                    furia2_2=furia2_1;
+														                }
+														                if(furia2_1%2==1){
+														                    furia2_1=furia2_1/2;
+														                    furia2_2=furia2_1+1;
+														                }
+														            }
+														            if(furia2_2==1){
+																		printf("Não é possível dividir quando se tem apenas 1 fúria.Voltando ao seu turno...");
+																			goto acao2;
+																	}
+														            if(furia2_2!=0&&furia2_2!=1){
+														            	
+														                if(furia2_2%2==0){
+														                    furia2_2=furia2_2/2;
+														                    furia2_1=furia2_2;
+														                }
+														                if(furia2_2%2==1){
+														                    furia2_2=furia2_2/2;
+														                    furia2_1=furia2_2+1;
+														                }
+														            }
+														            gosmas2=++gosmas2;
+														            morte2_1=false;
+																	morte2_2=false;
+														            printf("Voce dividiu as gosmas.");
+														        }
+														        break;
+														    }
+														}													
+					}while(gosmas1!=0 && gosmas2 !=0);
+							break;
+						}
+						case 4:{//sair
+							break;
+						}
+					
+						default:
+							printf("Resposta invalida. Retornando ao Menu...");
+							goto menu;
+							break;
+		}
+
+}
