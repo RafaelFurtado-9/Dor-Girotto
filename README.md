@@ -1,5 +1,6 @@
 3 Joguinhos.
-
+Um mini resumo, pode ler sobre a dolorosa experiência dessas ultimas semanas na wiki desse projetinho!
+Feito por: Aiam Maia e Rafael Furtado CC1TA
 
 -Dor do espaço, onde a gnt passou 1h30m tentando encontrar oq tava dando errado, era um espaço no scanf que tava dando problemas
 
