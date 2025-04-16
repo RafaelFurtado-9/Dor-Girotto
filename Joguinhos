@@ -245,7 +245,7 @@ int main()
 			
 			int c, r; //Variável para começar o jogo; variavel para ver as regras
 			int gosmas1, gosmas2;//Variáveis para gosmas
-			int furia1_1=5, furia1_2=5, furia2_1=5, furia2_2=5;//Variáveis de fúria para cada gosma
+			int furia1_1=1, furia1_2=1, furia2_1=1, furia2_2=1;//Variáveis de fúria para cada gosma
 			int atacante1, atacante2, sofredor1, sofredor2;//Variáveis para quem ataca e quem sofre,_,
 			int fim;
 			bool morte1_1= false, morte1_2= false, morte2_1= false, morte2_2= false;
